@@ -13,6 +13,7 @@
       --accent: #f57c00;
       --hover: #ff9800;
       --text: #ffffff;
+      --error: #ff4444;
     }
     * {
       box-sizing: border-box;
@@ -148,6 +149,10 @@
       text-align: center;
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     }
+    #result.error {
+      color: var(--error);
+      font-size: 1.2em;
+    }
     #history {
       font-size: 0.9em;
       text-align: left;
@@ -202,6 +207,7 @@
       h1 img { height: 35px; }
       .container { padding: 15px; }
       #result { font-size: 1.5em; }
+      #result.error { font-size: 1em; }
       #footer { font-size: 0.8em; }
       .social-links img { width: 16px; height: 16px; }
     }
@@ -209,6 +215,7 @@
       h1 { font-size: 1.2em; }
       h1 img { height: 30px; }
       #result { font-size: 1.2em; }
+      #result.error { font-size: 0.9em; }
     }
   </style>
 </head>
@@ -226,7 +233,7 @@
       <label><input type="checkbox" id="upDown"> Atas/Bawah</label>
       <label><input type="checkbox" id="color"> Rumah Sukan</label>
     </div>
-    <button onclick="generate()">Generate!</button>
+    <button id="generateBtn" onclick="generate()">Generate!</button>
     <button id="resetBtn" onclick="resetAll()">Reset</button>
     <button id="offHistoryBtn" onclick="toggleHistory()">Off History</button>
     <div id="result">-</div>
@@ -247,28 +254,44 @@
     let historyEnabled = false;
 
     function showPopup() {
-      document.getElementById('popupSound').play().catch(function(error) {
-        console.log("Audio play failed:", error);
-      });
-      alert("KUMPAU KE TU");
+      try {
+        document.getElementById('popupSound').play().catch(function(error) {
+          console.log("Audio play failed:", error);
+        });
+        alert("KUMPAU KE TU");
+      } catch (error) {
+        console.error("Error in showPopup:", error);
+      }
     }
 
     function generate() {
       try {
-        let min = parseInt(document.getElementById('min').value, 10);
-        let max = parseInt(document.getElementById('max').value, 10);
+        const minInput = document.getElementById('min');
+        const maxInput = document.getElementById('max');
+        const resultDiv = document.getElementById('result');
+        
+        // Reset kelas error
+        resultDiv.classList.remove('error');
         
         // Semak jika input kosong atau bukan nombor
-        if (isNaN(min) || isNaN(max)) {
-          alert("Sila masukkan nombor yang sah untuk Min dan Max!");
-          return;
-        }
-        // Semak jika min lebih besar atau sama dengan max
-        if (min >= max) {
-          alert("Max harus lebih besar daripada Min!");
+        let min = parseInt(minInput.value, 10);
+        let max = parseInt(maxInput.value, 10);
+        if (isNaN(min) || isNaN(max) || minInput.value === '' || maxInput.value === '') {
+          resultDiv.classList.add('error');
+          resultDiv.innerText = "Sila masukkan nombor yang sah!";
+          console.log("Invalid input: min =", minInput.value, "max =", maxInput.value);
           return;
         }
         
+        // Semak jika min lebih besar atau sama dengan max
+        if (min >= max) {
+          resultDiv.classList.add('error');
+          resultDiv.innerText = "Max harus lebih besar daripada Min!";
+          console.log("Invalid range: min =", min, "max =", max);
+          return;
+        }
+        
+        // Menjana nombor rawak
         let number = Math.floor(Math.random() * (max - min + 1)) + min;
         let leftRight = document.getElementById('leftRight').checked
           ? Math.random() < 0.5 ? 'Kiri' : 'Kanan'
@@ -281,6 +304,7 @@
           ? colors[Math.floor(Math.random() * colors.length)]
           : null;
         
+        // Membina hasil
         let resultParts = [number];
         let historyParts = [`Nombor: ${number}`];
         if (leftRight) {
@@ -296,14 +320,18 @@
           historyParts.push(`Warna: ${color}`);
         }
         
-        let result = resultParts.join(', ');
-        document.getElementById('result').innerText = result;
+        // Papar hasil
+        resultDiv.innerText = resultParts.join(', ');
+        console.log("Generated result:", resultParts.join(', '));
+        
+        // Kemas kini sejarah jika diaktifkan
         if (historyEnabled) {
           updateHistory(historyParts.join(', '));
         }
       } catch (error) {
         console.error("Error in generate function:", error);
-        alert("Ralat berlaku semasa menjana. Sila cuba lagi.");
+        document.getElementById('result').classList.add('error');
+        document.getElementById('result').innerText = "Ralat berlaku semasa menjana!";
       }
     }
 
@@ -315,15 +343,18 @@
           ? history.map(item => `<li>${item}</li>`).join('')
           : '<li>History: None</li>';
         document.getElementById('history').innerHTML = `<ul>${historyList}</ul>`;
+        console.log("History updated:", history);
       } catch (error) {
         console.error("Error in updateHistory function:", error);
-        alert("Ralat berlaku semasa mengemas kini sejarah.");
+        document.getElementById('result').classList.add('error');
+        document.getElementById('result').innerText = "Ralat berlaku semasa mengemas kini sejarah!";
       }
     }
 
     function resetAll() {
       try {
         history = [];
+        document.getElementById('result').classList.remove('error');
         document.getElementById('result').innerText = '-';
         document.getElementById('history').innerHTML = '<ul><li>History: Off</li></ul>';
         document.getElementById('min').value = '1';
@@ -331,9 +362,11 @@
         document.getElementById('leftRight').checked = false;
         document.getElementById('upDown').checked = false;
         document.getElementById('color').checked = false;
+        console.log("Reset completed");
       } catch (error) {
         console.error("Error in resetAll function:", error);
-        alert("Ralat berlaku semasa menetapkan semula.");
+        document.getElementById('result').classList.add('error');
+        document.getElementById('result').innerText = "Ralat berlaku semasa menetapkan semula!";
       }
     }
 
@@ -351,9 +384,11 @@
           button.textContent = 'Off History';
           button.style.background = var(--accent);
         }
+        console.log("History toggled:", historyEnabled);
       } catch (error) {
         console.error("Error in toggleHistory function:", error);
-        alert("Ralat berlaku semasa menukar sejarah.");
+        document.getElementById('result').classList.add('error');
+        document.getElementById('result').innerText = "Ralat berlaku semasa menukar sejarah!";
       }
     }
 
