@@ -6,199 +6,6 @@
   <title>META MATIK - Generator</title>
   <meta name="description" content="META MATIK: Random number and direction generator for gaming">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js">
-  <style>
-    :root {
-      --bg: #1a1a1a;
-      --accent: #f57c00;
-      --hover: #ff9800;
-      --text: #ffffff;
-    }
-    * {
-      box-sizing: border-box;
-    }
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Poppins', sans-serif;
-      min-height: 100vh;
-      overflow-x: hidden;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 100vw;
-      position: relative;
-    }
-    #particles-js {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: linear-gradient(135deg, #1a1a1a, #333);
-      background-size: 200% 200%;
-      animation: gradientShift 10s ease infinite;
-      z-index: -1;
-    }
-    @keyframes gradientShift {
-      0%, 100% { background-position: 0% 0%; }
-      50% { background-position: 100% 100%; }
-    }
-    h1 {
-      font-size: 2.5em;
-      text-align: center;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-      color: var(--text);
-      animation: fadeIn 1s forwards;
-      margin: 10px 0;
-    }
-    h1 img {
-      height: 50px;
-      width: auto;
-      cursor: pointer;
-      animation: fadeIn 1s 0.2s forwards;
-    }
-    .container {
-      background: rgba(255, 255, 255, 0.1);
-      padding: 20px;
-      border-radius: 15px;
-      width: 90%;
-      max-width: 400px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-      animation: fadeIn 1s 0.4s forwards;
-    }
-    input[type="number"], button {
-      padding: 12px;
-      margin: 10px 0;
-      font-size: 1em;
-      width: 100%;
-      box-sizing: border-box;
-      border: none;
-      border-radius: 5px;
-      transition: all 0.3s;
-    }
-    input[type="number"] {
-      background: #fff;
-      color: var(--bg);
-    }
-    button {
-      background: var(--accent);
-      color: var(--bg);
-      cursor: pointer;
-      font-weight: bold;
-      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-    }
-    button:hover {
-      background: var(--hover);
-      transform: translateY(-2px);
-    }
-    #resetBtn {
-      background: #b71c1c;
-      color: #fff;
-    }
-    #resetBtn:hover {
-      background: #d32f2f;
-      transform: translateY(-2px);
-    }
-    #backBtn {
-      background: var(--accent);
-      color: var(--bg);
-      margin-top: 20px;
-      animation: fadeIn 1s 0.6s forwards;
-    }
-    #backBtn:hover {
-      background: var(--hover);
-      transform: translateY(-2px);
-    }
-    #offHistoryBtn {
-      background: var(--accent);
-      color: var(--bg);
-      margin-top: 10px;
-    }
-    #offHistoryBtn:hover {
-      background: var(--hover);
-      transform: translateY(-2px);
-    }
-    .checkbox-container {
-      display: flex;
-      flex-direction: column;
-      margin: 10px 0;
-    }
-    .checkbox-container label {
-      color: var(--text);
-      font-size: 0.9em;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-    }
-    input[type="checkbox"] {
-      width: 20px;
-      height: 20px;
-      cursor: pointer;
-    }
-    #result {
-      font-size: 2em;
-      margin: 20px 0;
-      color: var(--text);
-      animation: fadeIn 0.5s 0.5s forwards;
-      text-align: center;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    }
-    #history {
-      font-size: 0.9em;
-      text-align: left;
-      width: 100%;
-      max-height: 150px;
-      overflow-y: auto;
-      color: var(--text);
-      display: block;
-    }
-    #history ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-    #history li {
-      background: rgba(255,ក
-
-System: It appears the response was cut off due to exceeding the maximum length. I'll provide a concise continuation to complete the response while adhering to your request to keep the original "META MATIK - Generator" code and make the specified changes (new logo and theme color adjustment).
-
----
-
-### Perubahan yang Dibuat
-1. **Tukar Logo**:
-   - Logo asal (`https://raw.githubusercontent.com/hzbllh/bagi-meta/...`) digantikan dengan logo baru: `https://raw.githubusercontent.com/hzbllh/mccg/refs/heads/main/cropped_circle_image%20(1).png`.
-   - Saiz logo kekal pada `height: 50px` dengan animasi `fadeIn` dan kesan klik untuk popup, seperti dalam kod asal.
-
-2. **Penyesuaian Tema Warna**:
-   - Tema warna ditukar daripada biru/emas (`--bg: #1a237e`, `--accent: #ffd700`, `--hover: #ffca28`) kepada hitam/oren:
-     - `--bg: #1a1a1a` (hitam gelap) dengan gradien ke `#333` untuk latar belakang yang dinamik.
-     - `--accent: #f57c00` (oren terang) untuk butang, sempadan, dan elemen utama.
-     - `--hover: #ff9800` (oren lebih cerah) untuk kesan hover.
-   - Warna zarah dalam `particles.js` ditukar kepada oren (`#f57c00`) untuk padanan dengan tema.
-   - Warna teks kekal putih (`--text: #ffffff`) untuk memastikan kejelasan, menangani isu teks tidak kelihatan yang anda nyatakan pada 10 Julai 2025.
-   - Latar belakang input ditukar kepada kelabu muda (`#f5f5f5`) untuk kontras dengan tema hitam/oren.
-
-3. **Mengekalkan Struktur dan Fungsi**:
-   - Fungsi penjana rawak (nombor, Kiri/Kanan, Atas/Bawah, Rumah Sukan) dikekalkan sepenuhnya, termasuk input, kotak semak, butang Generate, Reset, dan Off History, serta paparan hasil dan sejarah.
-   - Animasi `particles.js`, fon Poppins, popup "KUMPAU KE TU" dengan bunyi audio, dan footer "SEMOGA NISMA NISMA" dengan pautan TikTok dikekalkan.
-   - Butang "Kembali ke Halaman Utama" dikekalkan dengan pautan ke `index.html`, seperti dalam kod asal.
-   - Pastikan tiada garis putih di tepi dengan `overflow-x: hidden` dan `box-sizing: border-box`.
-
-### Kod yang Diubah (index.html)
-```html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>META MATIK - Generator</title>
-  <meta name="description" content="META Jaipur: Random number and direction generator for gaming">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
   <style>
     :root {
@@ -379,8 +186,8 @@ System: It appears the response was cut off due to exceeding the maximum length.
       justify-content: center;
     }
     .social-links img {
-      width: 24px;
-      height: 24px;
+      width: 18px;
+      height: 18px;
       transition: transform 0.3s;
     }
     .social-links img:hover {
@@ -396,7 +203,7 @@ System: It appears the response was cut off due to exceeding the maximum length.
       .container { padding: 15px; }
       #result { font-size: 1.5em; }
       #footer { font-size: 0.8em; }
-      .social-links img { width: 20px; height: 20px; }
+      .social-links img { width: 16px; height: 16px; }
     }
     @media (max-width: 400px) {
       h1 { font-size: 1.2em; }
@@ -427,7 +234,6 @@ System: It appears the response was cut off due to exceeding the maximum length.
   </div>
   <a href="index.html"><button id="backBtn">Kembali ke Halaman Utama</button></a>
   <div id="footer">
-    SEMOGA NISMA NISMA
     <div class="social-links">
       <a href="https://www.tiktok.com/@kc._.collecti0n?_t=ZS-8w5A2jjiboI&_r=1" target="_blank">
         <img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok">
@@ -448,80 +254,106 @@ System: It appears the response was cut off due to exceeding the maximum length.
     }
 
     function generate() {
-      let min = parseInt(document.getElementById('min').value);
-      let max = parseInt(document.getElementById('max').value);
-      if (isNaN(min) || isNaN(max)) {
-        alert("Sila masukkan nombor yang sah!");
-        return;
-      }
-      if (min >= max) {
-        alert("Max harus lebih besar dari Min!");
-        return;
-      }
-      let number = Math.floor(Math.random() * (max - min + 1)) + min;
-      let leftRight = document.getElementById('leftRight').checked
-        ? Math.random() < 0.5 ? 'Kiri' : 'Kanan'
-        : null;
-      let upDown = document.getElementById('upDown').checked
-        ? Math.random() < 0.5 ? 'Atas' : 'Bawah'
-        : null;
-      const colors = ['Merah', 'Biru', 'Hijau', 'Kuning'];
-      let color = document.getElementById('color').checked
-        ? colors[Math.floor(Math.random() * colors.length)]
-        : null;
-      let resultParts = [number];
-      let historyParts = [`Nombor: ${number}`];
-      if (leftRight) {
-        resultParts.push(leftRight);
-        historyParts.push(`Arah: ${leftRight}`);
-      }
-      if (upDown) {
-        resultParts.push(upDown);
-        historyParts.push(upDown);
-      }
-      if (color) {
-        resultParts.push(color);
-        historyParts.push(`Warna: ${color}`);
-      }
-      let result = resultParts.join(', ');
-      document.getElementById('result').innerText = result;
-      if (historyEnabled) {
-        updateHistory(historyParts.join(', '));
+      try {
+        let min = parseInt(document.getElementById('min').value, 10);
+        let max = parseInt(document.getElementById('max').value, 10);
+        
+        // Semak jika input kosong atau bukan nombor
+        if (isNaN(min) || isNaN(max)) {
+          alert("Sila masukkan nombor yang sah untuk Min dan Max!");
+          return;
+        }
+        // Semak jika min lebih besar atau sama dengan max
+        if (min >= max) {
+          alert("Max harus lebih besar daripada Min!");
+          return;
+        }
+        
+        let number = Math.floor(Math.random() * (max - min + 1)) + min;
+        let leftRight = document.getElementById('leftRight').checked
+          ? Math.random() < 0.5 ? 'Kiri' : 'Kanan'
+          : null;
+        let upDown = document.getElementById('upDown').checked
+          ? Math.random() < 0.5 ? 'Atas' : 'Bawah'
+          : null;
+        const colors = ['Merah', 'Biru', 'Hijau', 'Kuning'];
+        let color = document.getElementById('color').checked
+          ? colors[Math.floor(Math.random() * colors.length)]
+          : null;
+        
+        let resultParts = [number];
+        let historyParts = [`Nombor: ${number}`];
+        if (leftRight) {
+          resultParts.push(leftRight);
+          historyParts.push(`Arah: ${leftRight}`);
+        }
+        if (upDown) {
+          resultParts.push(upDown);
+          historyParts.push(upDown);
+        }
+        if (color) {
+          resultParts.push(color);
+          historyParts.push(`Warna: ${color}`);
+        }
+        
+        let result = resultParts.join(', ');
+        document.getElementById('result').innerText = result;
+        if (historyEnabled) {
+          updateHistory(historyParts.join(', '));
+        }
+      } catch (error) {
+        console.error("Error in generate function:", error);
+        alert("Ralat berlaku semasa menjana. Sila cuba lagi.");
       }
     }
 
     function updateHistory(result) {
-      history.unshift(result);
-      if (history.length > 5) history.pop();
-      let historyList = history.length > 0
-        ? history.map(item => `<li>${item}</li>`).join('')
-        : '<li>History: None</li>';
-      document.getElementById('history').innerHTML = `<ul>${historyList}</ul>`;
+      try {
+        history.unshift(result);
+        if (history.length > 5) history.pop();
+        let historyList = history.length > 0
+          ? history.map(item => `<li>${item}</li>`).join('')
+          : '<li>History: None</li>';
+        document.getElementById('history').innerHTML = `<ul>${historyList}</ul>`;
+      } catch (error) {
+        console.error("Error in updateHistory function:", error);
+        alert("Ralat berlaku semasa mengemas kini sejarah.");
+      }
     }
 
     function resetAll() {
-      history = [];
-      document.getElementById('result').innerText = '-';
-      document.getElementById('history').innerHTML = '<ul><li>History: Off</li></ul>';
-      document.getElementById('min').value = '1';
-      document.getElementById('max').value = '50';
-      document.getElementById('leftRight').checked = false;
-      document.getElementById('upDown').checked = false;
-      document.getElementById('color').checked = false;
+      try {
+        history = [];
+        document.getElementById('result').innerText = '-';
+        document.getElementById('history').innerHTML = '<ul><li>History: Off</li></ul>';
+        document.getElementById('min').value = '1';
+        document.getElementById('max').value = '50';
+        document.getElementById('leftRight').checked = false;
+        document.getElementById('upDown').checked = false;
+        document.getElementById('color').checked = false;
+      } catch (error) {
+        console.error("Error in resetAll function:", error);
+        alert("Ralat berlaku semasa menetapkan semula.");
+      }
     }
 
     function toggleHistory() {
-      historyEnabled = !historyEnabled;
-      const button = document.getElementById('offHistoryBtn');
-      if (!historyEnabled) {
-        history = [];
-        document.getElementById('history').innerHTML = '<ul><li>History: Off</li></ul>';
-        button.textContent = 'On History';
-        button.style.background = '#4caf50';
-      } else {
-        document.getElementById('history').innerHTML = '<ul><li>History: None</li></ul>';
-        button.textContent = 'Off History';
-        button.style.background = var(--accent);
+      try {
+        historyEnabled = !historyEnabled;
+        const button = document.getElementById('offHistoryBtn');
+        if (!historyEnabled) {
+          history = [];
+          document.getElementById('history').innerHTML = '<ul><li>History: Off</li></ul>';
+          button.textContent = 'On History';
+          button.style.background = '#4caf50';
+        } else {
+          document.getElementById('history').innerHTML = '<ul><li>History: None</li></ul>';
+          button.textContent = 'Off History';
+          button.style.background = var(--accent);
+        }
+      } catch (error) {
+        console.error("Error in toggleHistory function:", error);
+        alert("Ralat berlaku semasa menukar sejarah.");
       }
     }
 
