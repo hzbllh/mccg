@@ -291,7 +291,7 @@
           return;
         }
         
-        // Menjana nombor rawak
+        // Logik asal dari kod anda
         let number = Math.floor(Math.random() * (max - min + 1)) + min;
         let leftRight = document.getElementById('leftRight').checked
           ? Math.random() < 0.5 ? 'Kiri' : 'Kanan'
@@ -304,7 +304,6 @@
           ? colors[Math.floor(Math.random() * colors.length)]
           : null;
         
-        // Membina hasil
         let resultParts = [number];
         let historyParts = [`Nombor: ${number}`];
         if (leftRight) {
@@ -320,11 +319,10 @@
           historyParts.push(`Warna: ${color}`);
         }
         
-        // Papar hasil
-        resultDiv.innerText = resultParts.join(', ');
-        console.log("Generated result:", resultParts.join(', '));
+        let result = resultParts.join(', ');
+        resultDiv.innerText = result;
+        console.log("Generated result:", result);
         
-        // Kemas kini sejarah jika diaktifkan
         if (historyEnabled) {
           updateHistory(historyParts.join(', '));
         }
