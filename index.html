@@ -291,7 +291,7 @@
           return;
         }
         
-        // Logik asal dari kod anda
+        // Logik asal
         let number = Math.floor(Math.random() * (max - min + 1)) + min;
         let leftRight = document.getElementById('leftRight').checked
           ? Math.random() < 0.5 ? 'Kiri' : 'Kanan'
@@ -303,7 +303,6 @@
         let color = document.getElementById('color').checked
           ? colors[Math.floor(Math.random() * colors.length)]
           : null;
-        
         let resultParts = [number];
         let historyParts = [`Nombor: ${number}`];
         if (leftRight) {
@@ -318,7 +317,6 @@
           resultParts.push(color);
           historyParts.push(`Warna: ${color}`);
         }
-        
         let result = resultParts.join(', ');
         resultDiv.innerText = result;
         console.log("Generated result:", result);
