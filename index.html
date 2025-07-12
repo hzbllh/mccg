@@ -6,14 +6,13 @@
   <title>META MATIK - Generator</title>
   <meta name="description" content="META MATIK: Random number and direction generator for gaming">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js">
   <style>
     :root {
-      --bg: #1a1a1a;
-      --accent: #f57c00;
-      --hover: #ff9800;
+      --bg: #1a237e;
+      --accent: #ffd700;
+      --hover: #ffca28;
       --text: #ffffff;
-      --error: #ff4444;
     }
     * {
       box-sizing: border-box;
@@ -36,7 +35,7 @@
       left: 0;
       width: 100vw;
       height: 100vh;
-      background: linear-gradient(135deg, #1a1a1a, #333);
+      background: linear-gradient(135deg, #1a237e, #4a148c);
       background-size: 200% 200%;
       animation: gradientShift 10s ease infinite;
       z-index: -1;
@@ -82,7 +81,7 @@
       transition: all 0.3s;
     }
     input[type="number"] {
-      background: #f5f5f5;
+      background: #fff;
       color: var(--bg);
     }
     button {
@@ -115,12 +114,12 @@
       transform: translateY(-2px);
     }
     #offHistoryBtn {
-      background: var(--accent);
-      color: var(--bg);
+      background: #f57c00;
+      color: #fff;
       margin-top: 10px;
     }
     #offHistoryBtn:hover {
-      background: var(--hover);
+      background: #ff9800;
       transform: translateY(-2px);
     }
     .checkbox-container {
@@ -148,10 +147,6 @@
       animation: fadeIn 0.5s 0.5s forwards;
       text-align: center;
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    }
-    #result.error {
-      color: var(--error);
-      font-size: 1.2em;
     }
     #history {
       font-size: 0.9em;
@@ -191,13 +186,11 @@
       justify-content: center;
     }
     .social-links img {
-      width: 18px;
-      height: 18px;
+      width: 24px;
+      height: 24px;
       transition: transform 0.3s;
     }
-    .social-links img:hover {
-      transform: scale(1.2);
-    }
+    .social-links img:hover { transform: scale(1.2); }
     @keyframes fadeIn {
       from { opacity: 0; }
       to { opacity: 1; }
@@ -207,191 +200,138 @@
       h1 img { height: 35px; }
       .container { padding: 15px; }
       #result { font-size: 1.5em; }
-      #result.error { font-size: 1em; }
       #footer { font-size: 0.8em; }
-      .social-links img { width: 16px; height: 16px; }
+      .social-links img { width: 20px; height: 20px; }
     }
     @media (max-width: 400px) {
       h1 { font-size: 1.2em; }
       h1 img { height: 30px; }
       #result { font-size: 1.2em; }
-      #result.error { font-size: 0.9em; }
     }
   </style>
 </head>
 <body>
   <div id="particles-js"></div>
   <h1>
-    <img src="https://raw.githubusercontent.com/hzbllh/mccg/refs/heads/main/cropped_circle_image%20(1).png" alt="META MATIK Logo" onclick="showPopup()">
+    <img src="https://raw.githubusercontent.com/hzbllh/bagi-meta/refs/heads/main/a666a618-e5e2-49ff-a104-b18e34af2fe5_removalai_preview.png" alt="META MATIK Logo" onclick="showPopup()">
     META MATIK
   </h1>
   <div class="container">
     <input type="number" id="min" placeholder="Min Number" value="1">
     <input type="number" id="max" placeholder="Max Number" value="50">
     <div class="checkbox-container">
-      <label><input type="checkbox" id="leftRight"> Kiri/Kanan</label>
-      <label><input type="checkbox" id="upDown"> Atas/Bawah</label>
-      <label><input type="checkbox" id="color"> Rumah Sukan</label>
+      <label><input type="checkbox" id="leftRight"> Kiri/Kanan</label> <!-- Default off -->
+      <label><input type="checkbox" id="upDown"> Atas/Bawah</label> <!-- Default off -->
+      <label><input type="checkbox" id="color"> Rumah Sukan</label> <!-- Default off -->
     </div>
-    <button id="generateBtn" onclick="generate()">Generate!</button>
+    <button onclick="generate()">Generate!</button>
     <button id="resetBtn" onclick="resetAll()">Reset</button>
     <button id="offHistoryBtn" onclick="toggleHistory()">Off History</button>
     <div id="result">-</div>
-    <div id="history"><ul><li>History: Off</li></ul></div>
+    <div id="history"><ul><li>History: Off</li></ul></div> <!-- Default history off -->
   </div>
   <a href="index.html"><button id="backBtn">Kembali ke Halaman Utama</button></a>
   <div id="footer">
+    SEMOGA NISMA NISMA
     <div class="social-links">
-      <a href="https://www.tiktok.com/@kc._.collecti0n?_t=ZS-8w5A2jjiboI&_r=1" target="_blank">
-        <img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok">
-      </a>
+      <a href="https://www.tiktok.com/@kc._.collecti0n?_t=ZS-8w5A2jjiboI&_r=1" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok"></a>
     </div>
   </div>
   <audio id="popupSound" src="https://freesound.org/data/previews/258/258111_2046502-lq.mp3"></audio>
 
   <script>
     let history = [];
-    let historyEnabled = false;
+    let historyEnabled = false; // Default history off
 
     function showPopup() {
-      try {
-        document.getElementById('popupSound').play().catch(function(error) {
-          console.log("Audio play failed:", error);
-        });
-        alert("KUMPAU KE TU");
-      } catch (error) {
-        console.error("Error in showPopup:", error);
-      }
+      document.getElementById('popupSound').play().catch(function(error) {
+        console.log("Audio play failed:", error);
+      });
+      alert("KUMPAU KE TU");
     }
 
     function generate() {
-      try {
-        const minInput = document.getElementById('min');
-        const maxInput = document.getElementById('max');
-        const resultDiv = document.getElementById('result');
-        
-        // Reset kelas error
-        resultDiv.classList.remove('error');
-        
-        // Semak jika input kosong atau bukan nombor
-        let min = parseInt(minInput.value, 10);
-        let max = parseInt(maxInput.value, 10);
-        if (isNaN(min) || isNaN(max) || minInput.value === '' || maxInput.value === '') {
-          resultDiv.classList.add('error');
-          resultDiv.innerText = "Sila masukkan nombor yang sah!";
-          console.log("Invalid input: min =", minInput.value, "max =", maxInput.value);
-          return;
-        }
-        
-        // Semak jika min lebih besar atau sama dengan max
-        if (min >= max) {
-          resultDiv.classList.add('error');
-          resultDiv.innerText = "Max harus lebih besar daripada Min!";
-          console.log("Invalid range: min =", min, "max =", max);
-          return;
-        }
-        
-        // Logik asal
-        let number = Math.floor(Math.random() * (max - min + 1)) + min;
-        let leftRight = document.getElementById('leftRight').checked
-          ? Math.random() < 0.5 ? 'Kiri' : 'Kanan'
-          : null;
-        let upDown = document.getElementById('upDown').checked
-          ? Math.random() < 0.5 ? 'Atas' : 'Bawah'
-          : null;
-        const colors = ['Merah', 'Biru', 'Hijau', 'Kuning'];
-        let color = document.getElementById('color').checked
-          ? colors[Math.floor(Math.random() * colors.length)]
-          : null;
-        let resultParts = [number];
-        let historyParts = [`Nombor: ${number}`];
-        if (leftRight) {
-          resultParts.push(leftRight);
-          historyParts.push(`Arah: ${leftRight}`);
-        }
-        if (upDown) {
-          resultParts.push(upDown);
-          historyParts.push(upDown);
-        }
-        if (color) {
-          resultParts.push(color);
-          historyParts.push(`Warna: ${color}`);
-        }
-        let result = resultParts.join(', ');
-        resultDiv.innerText = result;
-        console.log("Generated result:", result);
-        
-        if (historyEnabled) {
-          updateHistory(historyParts.join(', '));
-        }
-      } catch (error) {
-        console.error("Error in generate function:", error);
-        document.getElementById('result').classList.add('error');
-        document.getElementById('result').innerText = "Ralat berlaku semasa menjana!";
+      let min = parseInt(document.getElementById('min').value);
+      let max = parseInt(document.getElementById('max').value);
+      if (isNaN(min) || isNaN(max)) {
+        alert("Sila masukkan nombor yang sah!");
+        return;
+      }
+      if (min >= max) {
+        alert("Max harus lebih besar dari Min!");
+        return;
+      }
+      let number = Math.floor(Math.random() * (max - min + 1)) + min;
+      let leftRight = document.getElementById('leftRight').checked
+        ? Math.random() < 0.5 ? 'Kiri' : 'Kanan'
+        : null;
+      let upDown = document.getElementById('upDown').checked
+        ? Math.random() < 0.5 ? 'Atas' : 'Bawah'
+        : null;
+      const colors = ['Merah', 'Biru', 'Hijau', 'Kuning'];
+      let color = document.getElementById('color').checked
+        ? colors[Math.floor(Math.random() * colors.length)]
+        : null;
+      let resultParts = [number];
+      let historyParts = [`Nombor: ${number}`];
+      if (leftRight) {
+        resultParts.push(leftRight);
+        historyParts.push(`Arah: ${leftRight}`);
+      }
+      if (upDown) {
+        resultParts.push(upDown);
+        historyParts.push(upDown);
+      }
+      if (color) {
+        resultParts.push(color);
+        historyParts.push(`Warna: ${color}`);
+      }
+      let result = resultParts.join(', ');
+      document.getElementById('result').innerText = result;
+      if (historyEnabled) {
+        updateHistory(historyParts.join(', '));
       }
     }
 
     function updateHistory(result) {
-      try {
-        history.unshift(result);
-        if (history.length > 5) history.pop();
-        let historyList = history.length > 0
-          ? history.map(item => `<li>${item}</li>`).join('')
-          : '<li>History: None</li>';
-        document.getElementById('history').innerHTML = `<ul>${historyList}</ul>`;
-        console.log("History updated:", history);
-      } catch (error) {
-        console.error("Error in updateHistory function:", error);
-        document.getElementById('result').classList.add('error');
-        document.getElementById('result').innerText = "Ralat berlaku semasa mengemas kini sejarah!";
-      }
+      history.unshift(result);
+      if (history.length > 5) history.pop();
+      let historyList = history.length > 0
+        ? history.map(item => `<li>${item}</li>`).join('')
+        : '<li>History: None</li>';
+      document.getElementById('history').innerHTML = `<ul>${historyList}</ul>`;
     }
 
     function resetAll() {
-      try {
-        history = [];
-        document.getElementById('result').classList.remove('error');
-        document.getElementById('result').innerText = '-';
-        document.getElementById('history').innerHTML = '<ul><li>History: Off</li></ul>';
-        document.getElementById('min').value = '1';
-        document.getElementById('max').value = '50';
-        document.getElementById('leftRight').checked = false;
-        document.getElementById('upDown').checked = false;
-        document.getElementById('color').checked = false;
-        console.log("Reset completed");
-      } catch (error) {
-        console.error("Error in resetAll function:", error);
-        document.getElementById('result').classList.add('error');
-        document.getElementById('result').innerText = "Ralat berlaku semasa menetapkan semula!";
-      }
+      history = [];
+      document.getElementById('result').innerText = '-';
+      document.getElementById('history').innerHTML = '<ul><li>History: Off</li></ul>'; // Default history off
+      document.getElementById('min').value = '1';
+      document.getElementById('max').value = '50';
+      document.getElementById('leftRight').checked = false; // Default off
+      document.getElementById('upDown').checked = false;    // Default off
+      document.getElementById('color').checked = false;     // Default off
     }
 
     function toggleHistory() {
-      try {
-        historyEnabled = !historyEnabled;
-        const button = document.getElementById('offHistoryBtn');
-        if (!historyEnabled) {
-          history = [];
-          document.getElementById('history').innerHTML = '<ul><li>History: Off</li></ul>';
-          button.textContent = 'On History';
-          button.style.background = '#4caf50';
-        } else {
-          document.getElementById('history').innerHTML = '<ul><li>History: None</li></ul>';
-          button.textContent = 'Off History';
-          button.style.background = var(--accent);
-        }
-        console.log("History toggled:", historyEnabled);
-      } catch (error) {
-        console.error("Error in toggleHistory function:", error);
-        document.getElementById('result').classList.add('error');
-        document.getElementById('result').innerText = "Ralat berlaku semasa menukar sejarah!";
+      historyEnabled = !historyEnabled;
+      const button = document.getElementById('offHistoryBtn');
+      if (!historyEnabled) {
+        history = [];
+        document.getElementById('history').innerHTML = '<ul><li>History: Off</li></ul>';
+        button.textContent = 'On History';
+        button.style.background = '#4caf50';
+      } else {
+        document.getElementById('history').innerHTML = '<ul><li>History: None</li></ul>';
+        button.textContent = 'Off History';
+        button.style.background = '#f57c00';
       }
     }
 
     particlesJS({
       particles: {
         number: { value: 50, density: { enable: true, value_area: 800 } },
-        color: { value: "#f57c00" },
+        color: { value: "#ffd700" },
         shape: { type: "circle" },
         opacity: { value: 0.5, random: true },
         size: { value: 3, random: true },
